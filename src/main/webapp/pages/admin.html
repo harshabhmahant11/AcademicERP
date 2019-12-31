@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<script type="text/javascript" src="../js/admin.js"></script>
+<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>-->
+<script src="../js/jquery.min.js"></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="../bootstrap-4.3.1-dist/css/bootstrap.min.css">
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>-->
+<script src="../js/popper.min.js"></script>
+<script src="../bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
+
+
+<link rel="stylesheet" href="../css/font-awesome-4.7.0/css/font-awesome.min.css">
+
+<link rel="stylesheet" href="../css/admin.css">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div class="topnav">
+    <a class="navbar-brand" href="#">
+        <img src="../images/logo.png" alt="logo" style="width:40px;">
+    </a>
+    <a style="color: white">International Institute of Information Technology,Bangalore</a>
+    <div class="topnav-right">
+        <a href="http://localhost:8080/AcademicERP_war/"><i class="fa fa-fw fa-user"></i> Logout</a>
+    </div>
+</div>
+
+
+<div class="bg-wait" style="display:none" id="wait" name="wait">
+
+    <img src="../images/ajax-loader.gif" alt="loading">
+
+</div>
+<div class="container">
+
+    <!-- The Modal -->
+    <div class="modal fade" id="modifyModal">
+        <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h1 class="modal-title">Modify Domain</h1>
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+
+                    <form action="">
+                        <div class="form-group">
+                            <label for="mod_code">Code ID:</label>
+                            <input class="form-control" type="text" id="mod_code" placeholder="Domain Code">
+                        </div>
+                        <div class="form-group">
+                            <label for="mod_name">Code Name:</label>
+                            <input class="form-control" type="text" id="mod_name" placeholder="Domain Name">
+                        </div>
+                        <div class="form-group">
+                            <label for="mod_capacity">Capacity:</label>
+                            <input class="form-control" type="text" id="mod_capacity" placeholder="Domain Capacity">
+                        </div>
+                        <div class="form-group">
+                            <label for="mod_qual">Qualification:</label>
+                            <input class="form-control" type="text" id="mod_qual" placeholder="Qualification">
+                        </div>
+                        <div class="container">
+
+
+                        </div>
+                    </form>
+
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" id="modifyButton" onclick="modifyPost()" class="btn btn-success">Modify</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!--Modal end-->
+
+    <!--ADD domain Modal -->
+
+    <div class="modal fade" id="AddModal">
+        <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h1 class="modal-title">Add New Domain</h1>
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+
+                    <form action="">
+                        <div class="form-group">
+                            <label for="mod_code">Code ID:</label>
+                            <input class="form-control" type="text" id="add_code" placeholder="Domain Code">
+                        </div>
+                        <div class="form-group">
+                            <label for="mod_name">Domain Name:</label>
+                            <input class="form-control" type="text" id="add_name" placeholder="Domain Name">
+                        </div>
+                        <div class="form-group">
+                            <label for="mod_capacity">Capacity:</label>
+                            <input class="form-control" type="text" id="add_capacity" placeholder="Domain Capacity">
+                        </div>
+                        <div class="form-group">
+                            <label for="mod_qual">Qualification:</label>
+                            <input class="form-control" type="text" id="add_qual" placeholder="Qualification">
+                        </div>
+                        <div class="container">
+                           <!-- <button type="button" id="addButton" onclick="modifyPost()" class="btn btn-success">Add</button>
+                                -->
+                        </div>
+                    </form>
+
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" id="addButton" onclick="AddDomain()" class="btn btn-success">Add</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <!--ADD domain Modal end-->
+
+    <!--View Student Modal -->
+
+    <div class="modal fade" id="ViewSModal">
+        <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h1 class="modal-title">Students Enrolled</h1>
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+
+                 <table class="table table-striped table-hover" id="StudentTable"></table>
+
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <!--View Student Modal end-->
+
+
+<h2 align="center" style="display:none" id="headLine">Domain Details</h2>
+<table id="domTable" class="table table-dark table-hover"></table>
+
+    <button type="button" id="addmodalbutton" class="btn btn-primary" data-toggle="modal" data-target="#AddModal" style="display:none">Add</button>
+
+</div>
+<script type="text/javascript">
+    $(document).ready(function() {
+
+            $('[data-toggle="tooltip"]').tooltip();
+            var urlloc = location.origin+"/AcademicERP_war/webapi/domain/getAll";
+
+            getAllDomain(urlloc);
+    });
+</script>
+
+
+</body>
+</html>
